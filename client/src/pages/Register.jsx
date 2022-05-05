@@ -6,7 +6,6 @@ import {
   MDBCardFooter,
   MDBValidation,
   MDBBtn,
-  MDBIcon,
   MDBSpinner,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
@@ -70,7 +69,7 @@ const Register = () => {
                 name="firstName"
                 onChange={onInputChange}
                 required
-                invalid
+                invalid="true"
                 validation="Please provide first name"
               />
             </div>
@@ -82,7 +81,7 @@ const Register = () => {
                 name="lastName"
                 onChange={onInputChange}
                 required
-                invalid
+                invalid="true"
                 validation="Please your last name"
               />
             </div>
@@ -94,7 +93,7 @@ const Register = () => {
                 name="email"
                 onChange={onInputChange}
                 required
-                invalid
+                invalid="true"
                 validation="Please provide email"
               />
             </div>
@@ -106,7 +105,7 @@ const Register = () => {
                 name="password"
                 onChange={onInputChange}
                 required
-                invalid
+                invalid="true"
                 validation="Please provide password"
               />
             </div>
@@ -118,7 +117,7 @@ const Register = () => {
                 name="confirmPassword"
                 onChange={onInputChange}
                 required
-                invalid
+                invalid="true"
                 validation="Please confirm  password"
               />
             </div>

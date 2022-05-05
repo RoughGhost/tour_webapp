@@ -6,7 +6,6 @@ import {
   MDBCardFooter,
   MDBValidation,
   MDBBtn,
-  MDBIcon,
   MDBSpinner,
 } from "mdb-react-ui-kit";
 import { FaUserCircle } from "react-icons/fa";
