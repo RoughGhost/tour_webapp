@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { register } from "../redux/features/authSlice";
+import { FaUserCircle } from "react-icons/fa";
 
 const initialState = {
   firstName: "",
@@ -57,7 +58,7 @@ const Register = () => {
       }}
     >
       <MDBCard alignment="center">
-        <MDBIcon fas icon="user-circle" />
+        <FaUserCircle style={{ marginLeft: "45%" }} size={50} />
         <h5>Sign Up</h5>
         <MDBCardBody>
           <MDBValidation onSubmit={handleSubmit} noValidate className="row g-3">
