@@ -15,17 +15,17 @@ export const createTour = createAsyncThunk(
   }
 );
 
-// export const getTours = createAsyncThunk(
-//   "tour/getTours",
-//   async (page, { rejectWithValue }) => {
-//     try {
-//       const response = await api.getTours(page);
-//       return response.data;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data);
-//     }
-//   }
-// );
+export const getTours = createAsyncThunk(
+  "tour/getTours",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.getTours();
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 // export const getTour = createAsyncThunk(
 //   "tour/getTour",
@@ -76,19 +76,19 @@ export const createTour = createAsyncThunk(
 //   }
 // );
 
-// export const updateTour = createAsyncThunk(
-//   "tour/updateTour",
-//   async ({ id, updatedTourData, toast, navigate }, { rejectWithValue }) => {
-//     try {
-//       const response = await api.updateTour(updatedTourData, id);
-//       toast.success("Tour Updated Successfully");
-//       navigate("/");
-//       return response.data;
-//     } catch (err) {
-//       return rejectWithValue(err.response.data);
-//     }
-//   }
-// );
+export const updateTour = createAsyncThunk(
+  "tour/updateTour",
+  async ({ id, updatedTourData, toast, navigate }, { rejectWithValue }) => {
+    try {
+      const response = await api.updateTour(updatedTourData, id);
+      toast.success("Tour Updated Successfully");
+      navigate("/");
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 // export const searchTours = createAsyncThunk(
 //   "tour/searchTours",
@@ -132,10 +132,10 @@ const tourSlice = createSlice({
     tour: {},
     tours: [],
     userTours: [],
-    tagTours: [],
-    relatedTours: [],
-    currentPage: 1,
-    numberOfPages: null,
+    // tagTours: [],
+    // relatedTours: [],
+    // currentPage: 1,
+    // numberOfPages: null,
     error: "",
     loading: false,
   },
@@ -156,19 +156,19 @@ const tourSlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
-    // [getTours.pending]: (state, action) => {
-    //   state.loading = true;
-    // },
-    // [getTours.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   state.tours = action.payload.data;
-    //   state.numberOfPages = action.payload.numberOfPages;
-    //   state.currentPage = action.payload.currentPage;
-    // },
-    // [getTours.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload.message;
-    // },
+    [getTours.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getTours.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.tours = action.payload;
+      // state.numberOfPages = action.payload.numberOfPages;
+      // state.currentPage = action.payload.currentPage;
+    },
+    [getTours.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
     // [getTour.pending]: (state, action) => {
     //   state.loading = true;
     // },
@@ -208,27 +208,27 @@ const tourSlice = createSlice({
     //   state.loading = false;
     //   state.error = action.payload.message;
     // },
-    // [updateTour.pending]: (state, action) => {
-    //   state.loading = true;
-    // },
-    // [updateTour.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   const {
-    //     arg: { id },
-    //   } = action.meta;
-    //   if (id) {
-    //     state.userTours = state.userTours.map((item) =>
-    //       item._id === id ? action.payload : item
-    //     );
-    //     state.tours = state.tours.map((item) =>
-    //       item._id === id ? action.payload : item
-    //     );
-    //   }
-    // },
-    // [updateTour.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload.message;
-    // },
+    [updateTour.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updateTour.fulfilled]: (state, action) => {
+      state.loading = false;
+      const {
+        arg: { id },
+      } = action.meta;
+      if (id) {
+        state.userTours = state.userTours.map((item) =>
+          item._id === id ? action.payload : item
+        );
+        state.tours = state.tours.map((item) =>
+          item._id === id ? action.payload : item
+        );
+      }
+    },
+    [updateTour.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
     // [likeTour.pending]: (state, action) => {},
     // [likeTour.fulfilled]: (state, action) => {
     //   state.loading = false;

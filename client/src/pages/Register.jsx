@@ -26,8 +26,8 @@ const Register = () => {
   const [formValue, setFormValue] = useState(initialState);
   const { loading, error } = useSelector((state) => ({ ...state.auth }));
   const { email, password, firstName, lastName, confirmPassword } = formValue;
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     error && toast.error(error);
@@ -36,7 +36,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      return toast.error("password should match");
+      return toast.error("Password should match");
     }
     if (email && password && firstName && lastName && confirmPassword) {
       dispatch(register({ formValue, navigate, toast }));
@@ -69,7 +69,7 @@ const Register = () => {
                 name="firstName"
                 onChange={onInputChange}
                 required
-                invalid="true"
+                invalid
                 validation="Please provide first name"
               />
             </div>
@@ -81,8 +81,8 @@ const Register = () => {
                 name="lastName"
                 onChange={onInputChange}
                 required
-                invalid="true"
-                validation="Please your last name"
+                invalid
+                validation="Please provide last name"
               />
             </div>
             <div className="col-md-12">
@@ -93,7 +93,7 @@ const Register = () => {
                 name="email"
                 onChange={onInputChange}
                 required
-                invalid="true"
+                invalid
                 validation="Please provide email"
               />
             </div>
@@ -105,20 +105,20 @@ const Register = () => {
                 name="password"
                 onChange={onInputChange}
                 required
-                invalid="true"
+                invalid
                 validation="Please provide password"
               />
             </div>
             <div className="col-md-12">
               <MDBInput
-                label="Confirm Password"
+                label="Password Confirm"
                 type="password"
                 value={confirmPassword}
                 name="confirmPassword"
                 onChange={onInputChange}
                 required
-                invalid="true"
-                validation="Please confirm  password"
+                invalid
+                validation="Please provide confirm password"
               />
             </div>
             <div className="col-12">
@@ -127,7 +127,7 @@ const Register = () => {
                   <MDBSpinner
                     size="sm"
                     role="status"
-                    tags="span"
+                    tag="span"
                     className="me-2"
                   />
                 )}
