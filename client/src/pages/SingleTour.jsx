@@ -9,12 +9,18 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import moment from "moment";
-import { getTour } from "../redux/features/tourSlice";
+import { getRelatedTours, getTour } from "../redux/features/tourSlice";
 import { FaCalendar } from "react-icons/fa";
 const SingleTour = () => {
   const dispatch = useDispatch();
   const { tour } = useSelector((state) => ({ ...state.tour }));
   const { id } = useParams();
+  const tags = tour?.tags;
+
+  useEffect(() => {
+    tags && dispatch(getRelatedTours(tags));
+  }, [tags]);
+
   useEffect(() => {
     if (id) {
       dispatch(getTour(id));
@@ -52,6 +58,7 @@ const SingleTour = () => {
               {tour.description}
             </MDBCardText>
           </MDBCardBody>
+          {/* Related Tours */}
         </MDBCard>
       </MDBContainer>
     </>

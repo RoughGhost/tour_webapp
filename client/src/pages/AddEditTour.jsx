@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardFooter,
   MDBValidation,
   MDBBtn,
-  MDBSpinner,
   MDBInput,
 } from "mdb-react-ui-kit";
 import ChipInput from "material-ui-chip-input";
