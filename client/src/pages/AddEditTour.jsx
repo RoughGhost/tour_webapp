@@ -27,7 +27,6 @@ const AddEditTour = () => {
   const { error, userTours } = useSelector((state) => ({
     ...state.tour,
   }));
-  const { loading } = useSelector((state) => ({ ...state.auth }));
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -93,7 +92,7 @@ const AddEditTour = () => {
       className="container"
     >
       <MDBCard alignment="center">
-        <h5> Add Tour</h5>
+        <h5>{id ? "Update Tour" : "Add Tour"}</h5>
         <MDBCardBody>
           <MDBValidation onSubmit={handleSubmit} className="row g-3" noValidate>
             <div className="col-md-12">
@@ -147,14 +146,6 @@ const AddEditTour = () => {
             </div>
             <div className="col-12">
               <MDBBtn style={{ width: "100%" }}>
-                {loading && (
-                  <MDBSpinner
-                    size="sm"
-                    role="status"
-                    tag="span"
-                    className="me-2"
-                  />
-                )}
                 {id ? "Update" : "Submit"}
               </MDBBtn>
               <MDBBtn
