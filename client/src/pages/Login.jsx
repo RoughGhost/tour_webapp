@@ -21,6 +21,8 @@ const initialState = {
   password: "",
 };
 
+// prod == 1000956201325-la8773vqrcvcum28q99q205567b7fqke.apps.googleusercontent.com
+
 const Login = () => {
   const [formValue, setFormValue] = useState(initialState);
   const { loading, error } = useSelector((state) => ({ ...state.auth }));
@@ -42,6 +44,11 @@ const Login = () => {
     let { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   };
+
+  const devEnv = process.env.NODE_ENV !== "production";
+  const clientId = devEnv
+    ? "1000956201325-0pil517a2nb7cb560ke4hq5e2egh2fi2.apps.googleusercontent.com"
+    : "000956201325-la8773vqrcvcum28q99q205567b7fqke.apps.googleusercontent.com";
   const googleSuccess = (resp) => {
     const email = resp?.profileObj?.email;
     const name = resp?.profileObj?.name;
@@ -108,7 +115,7 @@ const Login = () => {
           </MDBValidation>
           <br />
           <GoogleLogin
-            clientId="1000956201325-0pil517a2nb7cb560ke4hq5e2egh2fi2.apps.googleusercontent.com"
+            clientId={clientId}
             render={(renderProps) => (
               <MDBBtn
                 style={{ width: "100%" }}

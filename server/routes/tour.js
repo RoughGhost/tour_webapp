@@ -11,6 +11,7 @@ import {
   getToursBySearch,
   getToursByTag,
   getToursByUser,
+  likeTour,
   updateTour,
 } from "../controllers/tour.js";
 
@@ -23,5 +24,6 @@ router.get("/:id", getTour);
 router.delete("/:id", auth, deleteTour);
 router.patch("/:id", auth, updateTour);
 router.get("/userTours/:id", auth, getToursByUser);
+router.patch("/like/:id", auth, likeTour);
 
 export default router;
